@@ -1,0 +1,60 @@
+.welcome {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  .logo {
+    padding: 3rem;
+    width: 14rem;
+    height: 14rem;
+    border-radius: 100%;
+    background-color: #fff;
+    img {
+      display: block;
+      overflow: hidden;
+      width: 8rem;
+      height: 8rem;
+    }
+  }
+  .slogan {
+    padding-left: 2rem;
+    h1 {
+      font-size: 3rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      width: 14rem;
+      height: 4rem;
+      border-radius: 0.5rem;
+      background-color: #fff;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .welcome {
+    flex-direction: column;
+    .slogan {
+      padding-top: 5rem;
+      padding-left: 0;
+      text-align: center;
+      p {
+        margin-top: 1rem;
+      }
+      button {
+        margin-top: 8rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.message {
+  &-wrapper {
+    overflow: hidden;
+    display: flex;
+    padding: 0.5rem;
+    flex-wrap: nowrap;
+    &&-righted {
+      flex-direction: row-reverse;
+    }
+  }
+  &-bubble {
+    position: relative;
+    padding: 0.25rem 1rem;
+    margin: 0 0.5rem;
+    min-height: 2rem;
+    background-color: #353535;
+    border-radius: 1rem;
+    font-size: 1rem;
+  }
+  &-owner {
+    width: 2rem;
+    min-width: 2rem;
+    height: 2rem;
+    img {
+      width: 100%;
+    }
+  }
+}

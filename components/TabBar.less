@@ -1,0 +1,25 @@
+.tab-bar {
+  height: 3rem;
+  ul {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  li {
+    flex-grow: 1;
+    svg {
+      fill: #999;
+    }
+    &.active {
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+  .icon-inner {
+    display: block;
+    margin: 0 auto;
+    width: 2rem;
+    height: 2rem;
+  }
+}
