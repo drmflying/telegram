@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import Link from 'next/link';
 import Icon from 'components/Icon';
+import Avatar from 'components/Avatar';
 
 import './TabBar.less';
 export default function TabBar() {
@@ -48,7 +49,7 @@ export default function TabBar() {
         <li className={router.route.indexOf('/account') >= 0 ? 'active' : null}>
           <Link href='/account'>
             <a>
-              <img className='icon-inner' src='/animals/Aquarium.svg' />
+              <Avatar type='Aquarium' size='small' />
             </a>
           </Link>
         </li>

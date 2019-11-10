@@ -23,9 +23,9 @@ export default () => (
   >
     <List>
       <List.Item>
-        <Avatar type='Bird' size='large' />
+        <Avatar type='Aquarium' size='large' />
         <List.Label>
-          <h3>Bird</h3>
+          <h4 style={{ marginBottom: '14px' }}>Bird</h4>
           <p>+86 15678123873</p>
         </List.Label>
       </List.Item>
