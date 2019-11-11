@@ -1,17 +1,22 @@
-const Koa = require('koa');
-const next = require('next');
-const Router = require('koa-router');
-const server = new Koa();
-const http = require('http').Server(server.callback());
-const io = require('socket.io')(http);
+import httpModule from 'http';
+import Koa from 'koa';
+import Router from 'koa-router';
+import socketio from 'socket.io';
+import next from 'next';
+// import mongoose from 'mongoose';
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const server = new Koa();
+const http = new httpModule.Server(server.callback());
+
+const io = socketio(http);
+
+const port = parseInt(process.env.PORT || '3000', 10);
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handler = app.getRequestHandler();
 
 // 接口路由
-const apis = require('./apis');
+import apis from './apis';
 
 const animals = [
   'Aquarium',
@@ -83,15 +88,15 @@ const animals = [
   'Falcon',
   'Snail'
 ];
-const users = [];
+// const users = {};
 let nums = 0;
 // socket.io server
-io.on('connection', socket => {
+io.on('connection', (socket: any) => {
   let logged = false;
   console.log(socket.id);
 
   // 登录
-  socket.on('login', uuid => {
+  socket.on('login', (uuid: string) => {
     if (logged) return;
     let random = Math.floor(Math.random() * animals.length + 1) - 1;
     // 为当前的客户端存储 username
@@ -113,7 +118,7 @@ io.on('connection', socket => {
   });
 
   // 监听客户端发送的信息
-  socket.on('chat', function(data) {
+  socket.on('chat', function(data: any) {
     io.emit('chat', {
       owner: {
         uuid: socket.uuid,
@@ -154,9 +159,6 @@ io.on('connection', socket => {
 
 app.prepare().then(() => {
   const router = new Router();
-  router.get('/messages/:chat', async ctx => {
-    ctx.body = messages[ctx.params.chat];
-  });
 
   router.get('/meetings', async ctx => {
     await app.render(ctx.req, ctx.res, '/meetings', ctx.query);

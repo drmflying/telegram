@@ -3,8 +3,16 @@ import uuid from 'functions/uuid';
 import Button from 'components/Button';
 import './Welcome.less';
 
-export default class Welcome extends Component {
-  constructor(props) {
+interface PWelcome {
+  socket?: SocketIO.Socket;
+}
+
+interface SWelcome {
+  uuid: string;
+  started: boolean;
+}
+export default class Welcome extends Component<PWelcome, SWelcome> {
+  constructor(props: PWelcome) {
     super(props);
     this.state = {
       uuid: '',
@@ -18,7 +26,7 @@ export default class Welcome extends Component {
   }
   handleStart = () => {
     const { socket } = this.props;
-    socket.emit('login', this.state.uuid);
+    socket && socket.emit('login', this.state.uuid);
     this.setState({
       started: true
     });

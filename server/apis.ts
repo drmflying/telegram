@@ -3,13 +3,13 @@ const Router = require('koa-router');
 const base = new Router({
   prefix: '/api'
 });
-base.get('/', ctx => {
+base.get('/', (ctx: any) => {
   ctx.body = {
     msg: 'api base ok'
   };
 });
 
-base.get('/meeting/days', ctx => {
+base.get('/meeting/days', (ctx: any) => {
   ctx.body = [
     {
       day: 1572969600000,
@@ -201,4 +201,4 @@ base.get('/meeting/days', ctx => {
     }
   ];
 });
-module.exports = base;
+export default base;

@@ -1,23 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, FunctionComponent } from 'react';
 import Message from 'components/Message';
 import Forward from 'components/Forward';
 import './ChatRoom.less';
-export default function ChatRoom({ users, socket }) {
-  const [messages, setMessages] = useState([]);
-  const container = useRef(null);
+
+interface IChatRoom {
+  users?: any;
+  socket?: SocketIO.Socket;
+}
+type TMessage = {
+  owner: any;
+  message: string;
+  time: number;
+};
+
+const ChatRoom: FunctionComponent<IChatRoom> = ({ users, socket }) => {
+  if (!socket) {
+    return null;
+  }
+  const [messages, setMessages] = useState<TMessage[]>([]);
+  const container = useRef<HTMLDivElement>(null);
   useEffect(() => {
     socket.on('chat', updateMassages);
     return () => {
       socket.off('chat', updateMassages);
     };
   });
-  const updateMassages = message => {
+  const updateMassages = (message: TMessage) => {
     console.log(message);
     setMessages([...messages, message]);
-    if (container) {
+    if (container.current) {
       container.current.scrollTop = container.current.scrollHeight;
-      // console.dir(container.current.scrollTop = container.current.scrollHeight);
-      // container.current
     }
   };
   // socket.on('chat', message => updateMassages(message));
@@ -39,4 +51,5 @@ export default function ChatRoom({ users, socket }) {
       <Forward className='chat-room-footer' socket={socket} />
     </div>
   );
-}
+};
+export default ChatRoom;

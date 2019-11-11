@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 
 import './Avatar.less';
-export default function Avatar({ className, type, size = 'default' }) {
+
+interface IAvatar {
+  className?: string;
+  type?: string;
+  size?: string;
+}
+const Avatar: FunctionComponent<IAvatar> = ({
+  className,
+  type,
+  size = 'default'
+}) => {
   const classString = classNames(
     {
       avatar: true,
@@ -15,4 +25,5 @@ export default function Avatar({ className, type, size = 'default' }) {
       <img src={'/animals/' + type + '.svg'} alt={type} />
     </div>
   );
-}
+};
+export default Avatar;

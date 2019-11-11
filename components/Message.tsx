@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Avatar from 'components/Avatar';
 import './Message.less';
-export default function Message({ className, righted, owner, message }) {
+
+interface IMessage {
+  className?: string;
+  righted: boolean;
+  owner: any;
+  message: string;
+}
+
+const Message: FunctionComponent<IMessage> = ({
+  className,
+  righted,
+  owner,
+  message
+}) => {
   const classString = classNames(
     {
       'message-wrapper': true,
@@ -19,4 +32,5 @@ export default function Message({ className, righted, owner, message }) {
       <div className='message-bubble'>{message}</div>
     </div>
   );
-}
+};
+export default Message;

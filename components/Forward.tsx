@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import classNames from 'classnames';
 import Button from 'components/Button';
 import Input from 'components/Input';
 import Icon from 'components/Icon';
 import './Forward.less';
 
-export default function Forward({ className, socket }) {
+interface IForward {
+  className?: string;
+  socket?: SocketIO.Socket;
+}
+
+const Forward: FunctionComponent<IForward> = ({ className, socket }) => {
   const [value, setValue] = useState('');
   const classString = classNames(
     {
@@ -17,7 +22,7 @@ export default function Forward({ className, socket }) {
     if (value === '') {
       return false;
     }
-    socket.emit('chat', value);
+    socket && socket.emit('chat', value);
     setValue('');
   };
   return (
@@ -47,4 +52,5 @@ export default function Forward({ className, socket }) {
       </Button>
     </div>
   );
-}
+};
+export default Forward;

@@ -1,10 +1,13 @@
 import md5 from 'md5';
-const uuid = () => {
+const uuid = (): string => {
   let canvas = document.createElement('canvas');
   canvas.width = 2000;
   canvas.height = 200;
   canvas.style.display = 'inline';
   let context = canvas.getContext('2d');
+  if (!context) {
+    return '';
+  }
   context.rect(0, 0, 10, 10);
   context.rect(2, 2, 6, 6);
   context.textBaseline = 'alphabetic';
@@ -40,6 +43,6 @@ const uuid = () => {
     let base64 = canvas.toDataURL();
     return md5(base64);
   }
-  return false;
+  return '';
 };
 export default uuid;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FunctionComponent } from 'react';
 
 import Page from 'components/Page';
 import ChatRoom from 'components/ChatRoom';
@@ -7,14 +7,15 @@ import Button from 'components/Button';
 import List from 'components/List';
 import Avatar from 'components/Avatar';
 import Icon from 'components/Icon';
-Avatar;
-
-export default ({ socket }) => {
+interface IChats {
+  socket?: SocketIO.Socket;
+}
+const Chats: FunctionComponent<IChats> = ({ socket }) => {
   const [users, setUsers] = useState(null);
   useEffect(() => {
-    socket.on('login', data => setUsers(data));
+    socket && socket.on('login', setUsers);
     return () => {
-      socket.off('login');
+      socket && socket.off('login', setUsers);
     };
   });
   return (
@@ -78,3 +79,4 @@ export default ({ socket }) => {
     </>
   );
 };
+export default Chats;

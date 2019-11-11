@@ -1,7 +1,32 @@
-import React, { useState } from 'react';
+import React, {
+  ChangeEvent,
+  FocusEvent,
+  KeyboardEvent,
+  FunctionComponent,
+  useState,
+  ReactNode
+} from 'react';
 import classNames from 'classnames';
 import './Input.less';
-export default function Input({
+
+interface IInput {
+  className?: string;
+  value?: string;
+  defaultValue?: string;
+  placeholder?: string;
+  prefixes?: string;
+  type?: string;
+  size?: string;
+  disabled?: boolean;
+  autoFocus?: boolean;
+  suffix?: ReactNode;
+  prefix?: ReactNode;
+  onBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event: FocusEvent<HTMLInputElement>) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  onPressEnter?: (event: KeyboardEvent<HTMLInputElement>) => void;
+}
+const Input: FunctionComponent<IInput> = ({
   className,
   value,
   prefixes = 'input',
@@ -11,13 +36,12 @@ export default function Input({
   autoFocus,
   suffix,
   prefix,
-  defaultValue,
   placeholder,
   onBlur,
   onFocus,
   onChange,
   onPressEnter
-}) {
+}) => {
   const [focus, setFocus] = useState(autoFocus);
   const classString = classNames(
     {
@@ -37,18 +61,18 @@ export default function Input({
         disabled={disabled}
         type={type}
         value={value}
-        onBlur={e => {
+        onBlur={event => {
           setFocus(false);
-          onBlur && onBlur(e);
+          onBlur && onBlur(event);
         }}
-        onFocus={e => {
+        onFocus={event => {
           setFocus(true);
-          onFocus && onFocus(e);
+          onFocus && onFocus(event);
         }}
         onChange={onChange}
-        onKeyPress={e => {
-          if (e.key === 'Enter') {
-            onPressEnter && onPressEnter(e);
+        onKeyPress={event => {
+          if (event.key === 'Enter') {
+            onPressEnter && onPressEnter(event);
           }
         }}
         placeholder={placeholder}
@@ -56,4 +80,5 @@ export default function Input({
       <span className='input-suffix'>{suffix}</span>
     </label>
   );
-}
+};
+export default Input;

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import Page from 'components/Page';
+import React, { useState, useEffect, FunctionComponent } from 'react';
 import Welcome from 'components/Welcome';
 import ChatRoom from 'components/ChatRoom';
-export default ({ socket }) => {
+interface IHome {
+  socket?: SocketIO.Socket;
+}
+const Home: FunctionComponent<IHome> = ({ socket }) => {
   const [users, setUsers] = useState(null);
   useEffect(() => {
-    socket.on('login', data => setUsers(data));
+    socket && socket.on('login', setUsers);
     return () => {
-      socket.off('login');
+      socket && socket.off('login', setUsers);
     };
   });
   return (
@@ -17,3 +19,4 @@ export default ({ socket }) => {
     </>
   );
 };
+export default Home;
