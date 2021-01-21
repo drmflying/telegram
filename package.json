@@ -20,7 +20,7 @@
     "next": "^9.1.3",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.4.0",
     "styletron-engine-atomic": "^1.4.3",
     "styletron-react": "^5.2.4"
   },
